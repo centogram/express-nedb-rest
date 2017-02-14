@@ -11,7 +11,7 @@ function expressNedbRest() {
     router.cfg = { collections:[] };
 
     // parse body of request
-    router.use(bodyParser.json());
+    router.use(bodyParser.json({limit: '5mb'}));
 
     // add configuration to each request
     router.use(function (req, res, next) {
