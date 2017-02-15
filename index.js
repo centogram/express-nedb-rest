@@ -239,10 +239,11 @@ function addRestMethods(router) {
 
     //--------------------------------------------------------------------------
     router.put('/:collection/:id', function (req, res, next) {
+
         if (!req.body || typeof(req.body) != 'object') {
             return next({ status: 400, message: 'No Request Body' }); // Bad Request
         }
-        req.nedb.update({_id:req.id}, req.body, {multi:false}, function (err, count) {
+        req.nedb.update({_id:req.id}, req.body, {multi:false, upsert: req.query.upsert === 'true'}, function (err, count) {
             if (err) {
                 return next(err);
             }
