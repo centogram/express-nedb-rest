@@ -136,7 +136,13 @@ function addRestMethods(router) {
 
         if (typeof(req.query.$count) == "undefined") {
             // normal query
-            var query = req.nedb.find(_.extend(req.query, req.$filter));
+            var obj = _.extend(req.query, req.$filter);
+
+            if (obj.$filter) {
+              delete obj.$filter;
+            }
+   
+            var query = req.nedb.find(obj);
             // parse orderby
             if (req.query.$orderby) {
             try {
