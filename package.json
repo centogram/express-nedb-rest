@@ -1,13 +1,14 @@
 {
   "name": "express-nedb-rest",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "REST api for nedb database implemented in nodejs, based on express http server",
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "jison": "^0.4.17",
-    "nedb": "^1.8.0"
+    "nedb": "^1.8.0",
+    "underscore": "^1.8.3"
   },
   "devDependencies": {},
   "scripts": {

@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var nedb = require('nedb');
 var filter = require('./filter');
 var order = require('./order');
+var _ = require('underscore');
 
 function expressNedbRest() {
     var router = express.Router();
@@ -135,7 +136,7 @@ function addRestMethods(router) {
 
         if (typeof(req.query.$count) == "undefined") {
             // normal query
-            var query = req.nedb.find(req.$filter);
+            var query = req.nedb.find(_.extend(req.query, req.$filter));
             // parse orderby
             if (req.query.$orderby) {
             try {
