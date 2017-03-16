@@ -141,7 +141,7 @@ function addRestMethods(router) {
             if (obj.$filter) {
               delete obj.$filter;
             }
-   
+
             var query = req.nedb.find(obj);
             // parse orderby
             if (req.query.$orderby) {
@@ -267,7 +267,15 @@ function addRestMethods(router) {
         if (!req.body || typeof(req.body) != 'object') {
             return next({ status: 400, message: 'No Request Body' }); // Bad Request
         }
-        req.nedb.update(req.$filter, req.body, {multi:true}, function (err, count, docs) {
+
+        // normal query
+        var obj = _.extend(req.query, req.$filter);
+
+        if (obj.$filter) {
+          delete obj.$filter;
+        }
+
+        req.nedb.update(obj, req.body, {multi:true}, function (err, count, docs) {
             if (err) {
                 return next(err);
             }
